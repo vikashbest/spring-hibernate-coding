@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Add logback-classic, logback-core and slf4j-api JAR files (from lib) to build path to enable Logs -->
+<configuration>
+ 
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    <logger name="com.springtuts.hibernate.demo" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type" level="TRACE" />
+ 
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+ 
+</configuration>
