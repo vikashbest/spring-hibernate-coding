@@ -1,0 +1,45 @@
+package com.springtuts.aopdemo;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.springtuts.aopdemo.dao.AccountDAO;
+import com.springtuts.aopdemo.dao.MembershipDAO;
+
+public class MainDemoApp {
+
+	public static void main(String[] args) {
+		
+		// read spring config java class
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DemoConfig.class);
+		
+		// get the bean from spring container
+		AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
+		
+		// get membership bean from the spring container
+		MembershipDAO membershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
+		
+		// call the account business method
+		Account myAccount = new Account();
+		myAccount.setName("Vicky");
+		myAccount.setLevel("Platinum");
+		accountDAO.addAccount(myAccount, true);
+		accountDAO.doWork();
+		
+		// call the account dao getter/setter methods
+		accountDAO.setName("ABC");
+		accountDAO.setServiceCode("S01");
+		
+		String name = accountDAO.getName();
+		String code = accountDAO.getServiceCode();
+		System.out.println("Name: "+name+", Code: "+code);
+		
+		// call the membership business method
+		membershipDAO.addSillyMember();
+		membershipDAO.goToSleep();
+		
+		// close the context
+		context.close();
+		
+	}
+
+}
